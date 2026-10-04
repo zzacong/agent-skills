@@ -48,3 +48,17 @@ fleet skill pull git@github.com:zzacong/agent-skills.git
   worktree and the branch.
 - `worktree-session` — create a Git worktree for the requested task and move
   the current session there.
+
+## Development
+
+Requires Node 22.18+ and pnpm.
+
+```sh
+pnpm install
+pnpm run fmt      # format Markdown, YAML, and JSON with oxfmt
+pnpm run lint     # lint with oxlint
+pnpm run check    # fmt --check + lint
+```
+
+VS Code uses the Oxc extension as the default formatter and lints on save
+(`.vscode/settings.json`).

@@ -1,0 +1,24 @@
+{
+  "name": "agent-skills",
+  "private": true,
+  "scripts": {
+    "fmt": "oxfmt --write .",
+    "fmt:check": "oxfmt --check .",
+    "lint": "oxlint --no-error-on-unmatched-pattern .",
+    "check": "oxfmt --check . && oxlint --no-error-on-unmatched-pattern ."
+  },
+  "devDependencies": {
+    "oxfmt": "^0.71.0",
+    "oxlint": "^1.86.0"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12",
+      "onFail": "warn"
+    }
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}
