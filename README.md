@@ -1,34 +1,10 @@
 # agent-skills
 
 A versioned collection of agent skills, published to
-[skills.sh](https://skills.sh) and consumed by
-[fleet](https://github.com/zzacong/fleet).
-
-## Layout
-
-```
-skills/
-  babysit-pr/SKILL.md
-  choose-flow/SKILL.md
-  create-plan/SKILL.md
-  file-pr/SKILL.md
-  postplan/SKILL.md
-  postplan-read/SKILL.md
-  rebase-pr/SKILL.md
-  ticket-sweep/SKILL.md
-  worktree-finish/SKILL.md
-  worktree-session/SKILL.md
-```
+[skills.sh](https://skills.sh).
 
 Each immediate child directory of `skills/` containing a `SKILL.md` is a skill.
 The frontmatter `name` falls back to the directory name.
-
-`skills/` stays at the repo root so the repo matches the layout fleet expects
-from a customs repo (`<repo>/skills`). Point fleet at it with:
-
-```sh
-fleet skill pull git@github.com:zzacong/agent-skills.git
-```
 
 ## Skills
 
@@ -59,6 +35,3 @@ pnpm run fmt      # format Markdown, YAML, and JSON with oxfmt
 pnpm run lint     # lint with oxlint
 pnpm run check    # fmt --check + lint
 ```
-
-VS Code uses the Oxc extension as the default formatter and lints on save
-(`.vscode/settings.json`).
