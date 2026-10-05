@@ -13,6 +13,8 @@ The frontmatter `name` falls back to the directory name.
 - `choose-flow` — estimate the size of the current work and recommend whether
   to use /implement, /to-spec, or /to-tickets next.
 - `create-plan` — numbered implementation plan in `.plans/`.
+- `delta` — explain anything from the thread as a before-and-after, in whatever
+  form is easiest to grasp.
 - `file-pr` — file a concise pull request, then monitor its checks.
 - `postplan` — publish a plan, proposal, brief, architecture note, or similar
   document as a static HTML draft on Postplan.

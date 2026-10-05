@@ -1,0 +1,5 @@
+interface:
+  display_name: "Delta"
+  short_description: "Explain anything in the thread, before and after"
+policy:
+  allow_implicit_invocation: false
