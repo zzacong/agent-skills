@@ -24,11 +24,33 @@ The frontmatter `name` falls back to the directory name.
 
 ## Development
 
-Requires Node 22.18+ and pnpm.
+Requires Bun 1.4+.
 
 ```sh
-pnpm install
-pnpm run fmt      # format Markdown, YAML, and JSON with oxfmt
-pnpm run lint     # lint with oxlint
-pnpm run check    # fmt --check + lint
+bun install
+bun run fmt         # format Markdown, YAML, and JSON with oxfmt
+bun run lint        # lint with oxlint
+bun run typecheck   # tsc --noEmit
+bun test            # bun test
+bun run check       # fmt --check + lint + typecheck + test
 ```
+
+### Wrapping prose at 80 columns
+
+`oxfmt` is configured with `proseWrap: preserve`, so it never rewraps prose.
+To reflow Markdown text to 80 columns, use `scripts/wrap-markdown.ts`. It
+touches only paragraph text and copies everything else through unchanged:
+front matter, headings, code fences, indented code, tables, HTML blocks,
+thematic breaks, and link definitions. Blockquote markers and list hanging
+indents are preserved, as are hard line breaks. CJK and emoji are measured as
+two columns, and unspaced CJK wraps at character boundaries.
+
+```sh
+bun run wrap README.md skills/delta/SKILL.md   # rewrite in place
+bun run wrap --diff README.md                  # preview as a unified diff
+bun run wrap --width 100 --stdout README.md    # other widths, to stdout
+bun run wrap:check README.md                   # exit 1 if it needs wrapping
+```
+
+The wrapper is idempotent. Tests live in `scripts/wrap-markdown.test.ts`
+(`bun test`) and cover both the wrapper and the unified diff it emits.

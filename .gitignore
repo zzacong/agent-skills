@@ -17,28 +17,10 @@ out/
 *.egg-info/
 *.egg
 
-# Python bytecode and packaging
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-develop-eggs/
-eggs/
-parts/
-sdist/
-var/
-wheels/
-MANIFEST
-.installed.cfg
-
 # Test / coverage
 coverage/
 .nyc_output/
 htmlcov/
-.pytest_cache/
-.tox/
-.nox/
 junit.xml
 junit-report.xml
 
@@ -47,27 +29,14 @@ junit-report.xml
 .parcel-cache/
 .turbo/
 .eslintcache
-.ruff_cache/
-.mypy_cache/
-.dmypy.json
-.pyre/
-.pytype/
-.hypothesis/
 
 # Environments and secrets
 .env
 .env.*
 !.env.example
-.venv/
-.venv*/
-venv/
-venv*/
-env/
-ENV/
 .direnv/
 .dir-locals.el
 .envrc
-.pdm-python
 
 # Package manager state and logs
 .pnpm-store/
@@ -77,11 +46,11 @@ ENV/
 !.yarn/plugins
 !.yarn/versions
 *.log
+bun-debug.log*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-pip-log.txt
 
 # Editors
 .vscode/*

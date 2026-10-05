@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    // Bun runs TypeScript directly, so this exists for editor support and for
+    // `tsc --noEmit` in `bun run typecheck`. Nothing is emitted.
+    "target": "ESNext",
+    "module": "Preserve",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+
+    // Strictness, with `any` treated as an error per project conventions.
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": true,
+    "types": ["bun"],
+
+    // SkipLibCheck keeps third-party .d.ts noise out of the output.
+    "skipLibCheck": true
+  },
+  "include": ["scripts/**/*.ts"]
+}

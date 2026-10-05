@@ -31,4 +31,4 @@
 
 ## Verification
 
-Run `pnpm check` after changing files.
+Run `bun run check` after changing files.
