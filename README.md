@@ -19,8 +19,8 @@ The frontmatter `name` falls back to the directory name.
 | `postplan-read`    | Fetch and read a `postplan.dev` URL.                                                          |
 | `rebase-pr`        | Rebase an open pull request onto main, push it, then monitor its checks.                      |
 | `ticket-sweep`     | Implement all open local tickets in dependency order.                                         |
-| `worktree-finish`  | Squash-merge a worktree branch into main, then remove the worktree and the branch.            |
-| `worktree-session` | Create a Git worktree for the task and move the current session there.                        |
+| `worktree-finish`  | Local-only squash merge of a worktree branch into main, then remove the worktree and branch.  |
+| `worktree-session` | Create a Git worktree for the task and move the current session there when supported.         |
 
 ## Development
 

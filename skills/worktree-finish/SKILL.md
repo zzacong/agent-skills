@@ -1,7 +1,6 @@
 ---
 name: worktree-finish
-description: Squash merge a worktree branch into main, then remove
-  the worktree and the branch.
+description: Local only. Squash merge a worktree branch into the local main checkout, then remove the worktree and the branch. Never pushes and never merges through a remote pull request.
 disable-model-invocation: true
 argument-hint: "[slug or branch name, defaults to the current worktree]"
 ---
@@ -9,8 +8,11 @@ argument-hint: "[slug or branch name, defaults to the current worktree]"
 # Worktree finish
 
 Counterpart to `worktree-session`. Squash merge the worktree branch into
-main, move this session back to the main checkout, then delete the
-worktree and branch. Never push.
+the main checkout on this machine, move the session back there, then delete
+the worktree and the branch. The whole flow is local. It never pushes, never
+opens or merges a pull request, and never depends on a remote merge landing.
+For a branch you intend to land through a remote pull request, use `file-pr`
+or `rebase-pr` instead.
 
 ## 1. Identify the worktree and branch
 

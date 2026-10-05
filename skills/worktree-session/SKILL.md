@@ -1,12 +1,18 @@
 ---
 name: worktree-session
-description: Create a Git worktree for the requested task and move the current OpenCode V2 session there before implementation begins.
+description: Create a Git worktree for the requested task under the shared ~/Developer/worktrees layout, and move the current session into it when the harness supports a session API.
 argument-hint: "Task slug or short description"
 ---
 
 # Worktree session
 
 Use this skill as the first step for work that should happen on a new branch. It creates the worktree, moves this session to it, and only then starts the requested task.
+
+## Harness support
+
+The worktree convention applies in every harness. Create the worktree under `~/Developer/worktrees/<repository>/<slug>`, branch from the current `HEAD`, and copy any `.worktreeinclude` files. Do all of that even when the harness has no session API.
+
+Only the session move depends on the harness. Perform it when the running harness can relocate the current session to another directory, which OpenCode does through the V2 API (`opencode api session.get`, `opencode api session.move`). Check for that capability at runtime instead of assuming it. Without it, create and verify the worktree as normal, then tell the user the branch and absolute path and that the session stayed where it was because this harness cannot move it. A missing session API is never a reason to skip the worktree.
 
 ## Process
 
@@ -24,7 +30,7 @@ Use this skill as the first step for work that should happen on a new branch. It
 
    If `git status --short` prints anything, stop and ask the user to commit, stash, or otherwise account for those changes. `git worktree add` starts from `HEAD`; it does not copy uncommitted changes.
 
-5. Confirm that `opencode` is available and that the current session can be read through the V2 API. Use the current conversation session ID supplied in the session context, not a newly created session or an arbitrary session from the list:
+5. If the harness can move sessions, confirm it is available and that you can read the current session. Use the session ID from the session context, not a newly created session or one picked from a list:
 
    ```sh
    command -v opencode
@@ -33,7 +39,7 @@ Use this skill as the first step for work that should happen on a new branch. It
    opencode api session.get --param "sessionID=$session_id"
    ```
 
-   Stop before changing Git state if any check fails.
+   Stop before changing Git state if a check fails. Without this capability, skip the step and keep going.
 
 ### 2. Choose the worktree location
 
@@ -98,7 +104,7 @@ fi
 Do this before the session move so the checkout is complete when the
 session lands, and stop if the copy fails.
 
-After that command succeeds, move the current session to the new directory through the OpenCode V2 session API. The destination is another checkout of the same Git project, so the move transfers the session location without creating a second session:
+When the harness supports it, move the current session to the new directory after that command succeeds. The destination is another checkout of the same Git project, so the move relocates the session without creating a second one:
 
 ```sh
 payload="$(jq -n --arg directory "$destination" '{directory: $directory}')"
@@ -107,7 +113,7 @@ opencode api session.move \
   --data "$payload"
 ```
 
-If the API call fails, leave the new worktree in place, report its path and the error, and stop. Do not begin the task in the old worktree.
+If the move fails, leave the new worktree in place, report its path and the error, and stop. Do not begin the task in the old worktree.
 
 ### 4. Verify before implementation
 
@@ -117,11 +123,15 @@ Require all of these checks to pass:
 test "$(git -C "$destination" rev-parse --show-toplevel)" = "$destination"
 test "$(git -C "$destination" branch --show-current)" = "$branch"
 test -z "$(git -C "$destination" status --short)"
+```
 
+If you moved the session, also require:
+
+```sh
 opencode api session.get --param "sessionID=$session_id" \
   | jq -e --arg directory "$destination" '.data.location.directory == $directory' >/dev/null
 ```
 
-The session move is complete only when the API reports the destination and the new checkout reports the expected branch and clean status. Use the destination as the working directory for every later command. If the host still reports the old working directory, stop and resolve that session-context problem before editing files.
+A session move is complete only when the harness reports the new directory. Use the destination as the working directory for every later command. If a moved session still reports the old directory, stop and fix the session context before editing files. In a harness without a session API, run every later command against the destination yourself and say so when you report the setup.
 
 Once these checks pass, continue with the requested task in the new worktree. Report the branch and absolute worktree path when the setup is complete.
