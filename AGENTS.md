@@ -17,16 +17,16 @@
   > bundle optimization, or performance improvements."
 - Include OpenAI-compatible metadata at
   `skills/<name>/agents/openai.yaml` for each skill.
-- Write for an LLM, not a beginner. Include project-specific decisions,
-  constraints, steps, and failure handling only when they change what the agent
-  should do. Leave out general knowledge and routine explanations. For example,
-  skip explaining what a pull request is; include the required CLI command and
-  what to do if its authentication is missing.
-- For skills that take external or hard-to-reverse actions, state the
-  authorization and confirmation boundaries. For example, a request to draft a
-  document does not authorize publishing it. A worktree-cleanup skill should
-  say whether explicit invocation authorizes deleting the named worktree and
-  branch, and require asking if the target or merge status is unclear.
+- Write for an LLM, not a beginner. Leave out general knowledge and routine
+  explanations.
+- For skills that destroy data or write to something outside the local
+  checkout, state what the invocation authorizes and what needs asking first.
+  Do not manufacture ceremony for ordinary, expected steps: a request to file
+  a PR covers pushing the branch and opening the PR. Draw the line at actions
+  the user would be surprised to learn happened. A worktree-cleanup skill
+  should say whether explicit invocation authorizes deleting the named
+  worktree and branch, and require asking if the target or merge status is
+  unclear.
 - Update the skill list in `README.md` when adding or removing skills.
 
 ## Verification
