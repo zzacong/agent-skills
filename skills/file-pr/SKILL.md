@@ -88,38 +88,6 @@ that fits what changed:
 Show the artefact, not a description of it. Fences and images both work; the
 format is yours to choose.
 
-Below is one filled-in example, a CLI, so it shows fences. Don't copy the medium
-from it. Copy the shape: measured problem, real before, real after.
-
-Good:
-
-> `fleet skill doctor` printed one paragraph per double-presence finding. Twelve
-> colliding skills became twelve near-identical paragraphs, and you scanned past
-> the same two hundred characters to find the one value that changed. It now
-> groups by harness and home pair. Two colliding repos take a few lines.
->
-> Before:
->
-> ```text
-> ⚠ double presence (10)
-> "babysit-pr" exists in both the explicit repo (/Users/zacong/…/skills/babysit-pr) and the explicit repo (/Users/zacong/…/skills/babysit-pr) — opencode and pi would see it twice — resolve by hand (remove one of the copies: …)
-> … 9 more near-identical paragraphs
-> ```
->
-> After:
->
-> ```text
-> ⚠ double presence (10)
->   opencode  duplicated in ~/Developer/projects/fleet/skills and ~/Developer/projects/agent-skills/skills — remove one copy by hand
->             babysit-pr, choose-flow, file-pr, postplan, ticket-sweep
->   pi        duplicated in ~/Developer/projects/fleet/skills and ~/Developer/projects/agent-skills/skills — remove one copy by hand
->             babysit-pr, choose-flow, file-pr, postplan, ticket-sweep
-> ```
-
-Bad:
-
-> Significantly reduced output verbosity.
-
 Rules:
 
 - Show the output; don't describe it. If there's nothing to show, say the change
