@@ -1,0 +1,5 @@
+interface:
+  display_name: "Worktree Finish"
+  short_description: "Squash merge a worktree branch locally and clean up"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Create Plan"
+  short_description: "Numbered implementation plan in .plans/"
+policy:
+  allow_implicit_invocation: false
