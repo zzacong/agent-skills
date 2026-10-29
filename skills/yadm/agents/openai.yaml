@@ -1,0 +1,5 @@
+interface:
+  display_name: "yadm"
+  short_description: "Stage, commit, and push dotfiles via yadm"
+policy:
+  allow_implicit_invocation: false
