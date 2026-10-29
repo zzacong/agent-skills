@@ -25,7 +25,7 @@ Stop and ask before staging any credential-like file (names containing `auth`, `
 
 ## 2. Check the index is clean
 
-Run `yadm status`. Run `yadm diff --cached --name-only`. If the index holds anything that isn't a resolved target, stop and ask. No changes to targets: report nothing to commit and stop.
+Run `yadm status`. Never pass `-u` / `--untracked-files` (in any form): it lists every untracked file in `$HOME` and floods the output. Run `yadm diff --cached --name-only`. If the index holds anything that isn't a resolved target, stop and ask. No changes to targets: report nothing to commit and stop.
 
 ## 3. Stage and verify
 
