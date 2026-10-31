@@ -12,7 +12,6 @@ The frontmatter `name` falls back to the directory name.
 | --------------------- | --------------------------------------------------------------------------------------------- |
 | `babysit-pr`          | Watch a pull request's checks until they finish, then diagnose failures.                      |
 | `choose-flow`         | Estimate the size of the current work and recommend /implement, /to-spec, or /to-tickets.     |
-| `create-plan`         | Numbered implementation plan in `.plans/`.                                                    |
 | `delta`               | Explain anything from the thread as a before-and-after, in whatever form is easiest to grasp. |
 | `file-pr`             | File a concise pull request, then monitor its checks.                                         |
 | `oc-worktree-finish`  | Local-only squash merge of a worktree branch into main, then remove the worktree and branch.  |
