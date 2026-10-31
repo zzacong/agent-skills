@@ -7,12 +7,11 @@ argument-hint: "[slug or branch name, defaults to the current worktree]"
 
 # Worktree finish
 
-Counterpart to `worktree-session`. Squash merge the worktree branch into
-the main checkout on this machine, move the session back there, then delete
-the worktree and the branch. The whole flow is local. It never pushes, never
-opens or merges a pull request, and never depends on a remote merge landing.
-For a branch you intend to land through a remote pull request, use `file-pr`
-or `rebase-pr` instead.
+Squash merge the worktree branch into the main checkout on this machine, move
+the session back there, then delete the worktree and the branch. The whole flow
+is local. It never pushes, never opens or merges a pull request, and never
+depends on a remote merge landing. For a branch you intend to land through a
+remote pull request, use `file-pr` or `rebase-pr` instead.
 
 ## 1. Identify the worktree and branch
 
@@ -21,12 +20,11 @@ main_root="$(git worktree list --porcelain | sed -n '1s/^worktree //p')"
 current_root="$(git rev-parse --show-toplevel)"
 ```
 
-If the session runs in a linked worktree, that worktree is the target.
-Otherwise resolve the invocation argument (a slug or branch name; take
-its last path segment) against the layout `worktree-session` created:
-`$HOME/Developer/worktrees/$(basename "$main_root")/<slug>`. With no
-argument, list the worktrees under that directory and ask. Stop if the
-path is missing or absent from `git worktree list`.
+If the session runs in a linked worktree, that worktree is the target. Otherwise
+resolve the invocation argument (a slug or branch name; take its last path
+segment) against the standard layout: `$HOME/Developer/worktrees/$(basename
+"$main_root")/<slug>`. With no argument, list the worktrees under that directory
+and ask. Stop if the path is missing or absent from `git worktree list`.
 
 ```sh
 destination="<resolved path>"
@@ -50,9 +48,9 @@ git -C "$main_root" log --oneline "$main_branch..$branch"
 # log must print at least one commit
 ```
 
-On a failed check, stop and let the user fix it (commit, stash, check
-out the right branch). If the log prints nothing there is nothing to
-merge; ask whether to just remove the worktree and branch.
+On a failed check, stop and let the user fix it (commit, stash, check out the
+right branch). If the log prints nothing there is nothing to merge; ask whether
+to just remove the worktree and branch.
 
 ## 3. Rebase onto main
 
@@ -95,10 +93,9 @@ AGENTS.md, with the individual commits as body bullets.
 
 ## 5. Move session, remove, verify
 
-When `opencode` and `jq` exist, move the session home before the
-worktree disappears (the reverse of `worktree-session`'s move). If the
-move fails, continue but say plainly that the session still points at
-the removed path.
+When `opencode` and `jq` exist, move the session home before the worktree
+disappears. If the move fails, continue but say plainly that the session still
+points at the removed path.
 
 ```sh
 session_id="<current session ID>"
@@ -111,6 +108,5 @@ git -C "$main_root" worktree remove "$destination"
 git -C "$main_root" branch -D "$branch"
 ```
 
-Verify the worktree path is gone, the branch is gone, and main is
-clean. Report the squash commit (`git log -1 --oneline`) and that
-cleanup is done.
+Verify the worktree path is gone, the branch is gone, and main is clean. Report
+the squash commit (`git log -1 --oneline`) and that cleanup is done.
