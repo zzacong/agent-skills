@@ -11,8 +11,11 @@
   users are likely to say, including task verbs and domain terms. Add key
   exclusions to avoid matching nearby tasks. Keep procedure details in
   `SKILL.md`.
-- Include OpenAI-compatible metadata at
-  `skills/<name>/agents/openai.yaml` for each skill.
+- Include OpenAI-compatible metadata at `skills/<name>/agents/openai.yaml` for
+  each skill, except `oc-` skills.
+- Skills specific to OpenCode take the `oc-` prefix, for example
+  `oc-worktree-session`. They are OpenCode-only, so they do not need
+  `agents/openai.yaml`.
 - Write for an LLM, not a beginner. Leave out general knowledge and routine
   explanations.
 - For skills that destroy data or write to something outside the local

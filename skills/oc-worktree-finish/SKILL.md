@@ -1,5 +1,5 @@
 ---
-name: worktree-finish
+name: oc-worktree-finish
 description: Local only. Squash merge a worktree branch into the local main checkout, then remove the worktree and the branch. Never pushes and never merges through a remote pull request.
 disable-model-invocation: true
 argument-hint: "[slug or branch name, defaults to the current worktree]"
